@@ -8,6 +8,7 @@ import {
   } from "@material-tailwind/react";
 import './nav.css'
 import { NavLink } from "react-router-dom";
+import SignIn from "../Pages/SignIn/SignIn";
 
 const Nav = () => {
   
@@ -41,9 +42,9 @@ const Nav = () => {
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="mr-4 cursor-pointer py-1.5 font-medium text-orange-800 text-xl"
           >
-            Material Tailwind
+            Tech<span className="font-semibold"><span className="text-red-900 text-xl">Z</span>eni<span className="text-red-900 text-xl">th</span></span>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
@@ -53,7 +54,7 @@ const Nav = () => {
                 size="sm"
                 className="hidden lg:inline-block"
               >
-                <NavLink>Log In</NavLink>
+                <NavLink to={'/signin'}>Log In</NavLink>
               </Button>
             </div>
             <IconButton
@@ -70,7 +71,7 @@ const Nav = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
-                >
+              >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -99,7 +100,7 @@ const Nav = () => {
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="p-1">
-              <NavLink>Log In</NavLink>
+              <NavLink to={SignIn}>Log In</NavLink>
             </Button>
           </div>
         </MobileNav>
