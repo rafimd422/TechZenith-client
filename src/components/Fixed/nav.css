@@ -1,0 +1,6 @@
+li .active {
+    background-color: gray;
+    border-radius: .6rem;
+    color: white;
+    padding: .5rem;
+}

@@ -5,11 +5,14 @@ import {
 } from "react-router-dom";
 import './index.css'
 import Router from './Router/Router';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const router = Router
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+        <ThemeProvider>
     <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 )

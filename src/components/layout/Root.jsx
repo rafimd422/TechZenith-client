@@ -5,8 +5,8 @@ import Footer from "../Fixed/Footer";
 const Root = () => {
   return (<>
     <div>
-      <Nav />
-<Outlet/>
+<Nav />
+  <Outlet/>
  <Footer />
     </div>
     </>
