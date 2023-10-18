@@ -45,34 +45,15 @@ fetch("http://localhost:5000/products", {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const handleChange = (value) => {
     setCategory(value);
     console.log("Selected category: ", value);
   };
 
   return (
-    <div className="min-h-screen mb-12 bg-gray-100 p-0 sm:p-12">
+    <div className="min-h-screen pb-12 bg-gray-100 p-0 sm:p-12">
       <h3 className="text-3xl font-bold mb-8 text-center">Product Showcase</h3>
-      <p>
+      <p className="text-center">
         Welcome to our platform! We're excited to help you showcase your product
         to a wider audience. Please use the form below to add your product
         details.

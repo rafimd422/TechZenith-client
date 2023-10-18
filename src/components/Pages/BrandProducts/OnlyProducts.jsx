@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -46,10 +47,10 @@ return (
 
 <div className="flex flex-col">
 <CardFooter className="pt-0 flex justify-between">
-        <Button
+        <Button 
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
-          View Details
+          <NavLink to={`/products/id/${data._id}`}>View Details</NavLink>
         </Button>
 
         <Button
