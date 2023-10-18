@@ -101,7 +101,7 @@ const Nav = () => {
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="p-1">
-              <NavLink to={SignIn}>Log In</NavLink>
+              <NavLink to={'/signIn'}>Log In</NavLink>
             </Button>
           </div>
         </MobileNav>
