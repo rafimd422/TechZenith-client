@@ -1,7 +1,3 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faApple } from "@fortawesome/free-brands-svg-icons";
-import { faS } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { Button } from "@material-tailwind/react";
 
@@ -24,7 +20,7 @@ const Brands = () => {
           <div key={brand.id} className="text-center my-2">
             <img src={brand.icon} className="h-20 w-28 mx-auto mb-2" alt="" />
             <p className="capitalize">{brand.name}</p>
-            <Button className="my-4" variant="outlined">View Products</Button>
+            <Button className="my-4" variant="outlined"><Link to={`/products/${brand.name}`}>View Products</Link></Button>
           </div>
         ))}
       </div>
