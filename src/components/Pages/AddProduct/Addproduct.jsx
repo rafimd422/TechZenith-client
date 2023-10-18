@@ -1,15 +1,15 @@
 import { Option, Select } from "@material-tailwind/react";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
   const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
 
   const handleAddProduct = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photourl = e.target.photourl.value;
-    const brand = e.target.brand.value;
+    const brand = e.target.brand.value.toLowerCase();
     const shortdescription = e.target.shortdescription.value;
     const rating = e.target.rating.value;
     const price = e.target.price.value;
@@ -17,6 +17,26 @@ const AddProduct = () => {
 const formDetails = { name, photourl, brand, category , shortdescription , rating ,price,avaiablity}
 console.log(formDetails)
 
+fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if(data.acknowledged){
+            Swal.fire(
+                'Good job!',
+                'Your Product is Added Successfully',
+                'success'
+              )
+              e.target.reset()
+        }
+      })
+  
 
 
 
