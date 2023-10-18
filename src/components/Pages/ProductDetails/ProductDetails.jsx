@@ -5,8 +5,6 @@ const ProductDetails = () => {
     const data = useLoaderData()
 console.log(data)
 
-
-
   return (
     <div className="lg:container lg:mx-auto md:px-0 px-12 flex flex-wrap gap-6 p-2 items-center justify-center">
 <div className="w-80">

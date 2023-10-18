@@ -52,12 +52,12 @@ return (
         >
           <NavLink to={`/products/id/${data._id}`}>View Details</NavLink>
         </Button>
-
-        <Button
+<NavLink to={`/update/id/${data._id}
+`}>        <Button
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
           Update Details
-        </Button>
+        </Button></NavLink>
       </CardFooter>
       <button className={data.avaiablity === "Available" ? `bg-green-500  mb-2mt-2hover:bg-green-700 text-white font-bold py-2 px-4 rounded` : `bg-red-500 hover:bg-red-700 text-white font-bold ms-auto w-full py-2 mt-2 px-4 rounded`}>
     {data.avaiablity}

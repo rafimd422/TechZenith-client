@@ -1,68 +1,72 @@
-import { Option, Select } from "@material-tailwind/react";
-import { useState } from "react";
-import Swal from "sweetalert2";
+import { Option, Select } from '@material-tailwind/react';
+import { useState } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
-const AddProduct = () => {
-  const [category, setCategory] = useState("");
+const Update = () => {
+    const data = useLoaderData()
 
-  const handleAddProduct = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const photourl = e.target.photourl.value;
-    const brand = e.target.brand.value.toLowerCase();
-    const shortdescription = e.target.shortdescription.value;
-    const rating = e.target.rating.value;
-    const price = e.target.price.value;
-    const avaiablity = e.target.avaiablity.value;
-const formDetails = { name, photourl, brand, category , shortdescription , rating ,price,avaiablity}
-console.log(formDetails)
+console.log(data)
 
-fetch("http://localhost:5000/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formDetails),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if(data.acknowledged){
-            Swal.fire(
-                'Good job!',
-                'Your Product is Added Successfully',
-                'success'
-              )
-              e.target.reset()
-        }
-      })
-  };
+    const [category, setCategory] = useState("");
+const Navigate = useNavigate()
+    const handleUpdate = (e) => {
+      e.preventDefault();
+      const name = e.target.name.value;
+      const photourl = e.target.photourl.value;
+      const brand = e.target.brand.value.toLowerCase();
+      const shortdescription = e.target.shortdescription.value;
+      const rating = e.target.rating.value;
+      const price = e.target.price.value;
+      const avaiablity = e.target.avaiablity.value;
+  const formDetails = { name, photourl, brand, category , shortdescription , rating ,price,avaiablity}
+  console.log(formDetails)
+  
+fetch(`http://localhost:5000/products/${data._id}`,{
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formDetails),
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    if(data.modifiedCount > 0){
+        Swal.fire({
+            position: 'middle-center',
+            icon: 'success',
+            title: 'Product has been Updated',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          Navigate(-1)
+    }
+  });
+
+    }
 
 
+    const handleChange = (value) => {
+        setCategory(value);
+        console.log("Selected category: ", value);
+      };
 
 
-  const handleChange = (value) => {
-    setCategory(value);
-    console.log("Selected category: ", value);
-  };
 
   return (
     <div className="min-h-screen pb-12 bg-gray-100 p-0 sm:p-12">
-      <h3 className="text-3xl font-bold mb-8 text-center">Product Showcase</h3>
-      <p className="text-center">
-        Welcome to our platform! We're excited to help you showcase your product
-        to a wider audience. Please use the form below to add your product
-        details.
-      </p>
+
       <div className="my-6 mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
-        <h1 className="text-2xl font-bold mb-8">Add a new Product</h1>
-        <form onSubmit={handleAddProduct}>
+        <h1 className="text-2xl font-bold mb-8 text-center">Update Product</h1>
+        <form onSubmit={handleUpdate}>
           <div className="w-full mb-5">
             <input
               type="text"
               name="name"
               placeholder="Enter Product Name"
               required
+              defaultValue={data.name}
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
             />
             <label htmlFor="name" className="absolute duration-300 top-3 -z-1 origin-0">
@@ -73,6 +77,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="url"
               name="photourl"
+              defaultValue={data.photourl}
               placeholder="Enter Photo Url"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -85,6 +90,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="text"
               name="brand"
+              defaultValue={data.brand}
               placeholder="Enter Brand Name"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -97,7 +103,9 @@ fetch("http://localhost:5000/products", {
             name="category"
             variant="standard"
             label="Select Category"
+            defaultValue={data.category}
             value={category}
+            required
             onChange={(value) => handleChange(value)} // Pass the selected value
           >
             <Option value="Phone">Phone</Option>
@@ -113,6 +121,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="text"
               name="shortdescription"
+              defaultValue={data.shortdescription}
               placeholder="Short Description"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -125,6 +134,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="number"
               name="rating"
+              defaultValue={data.rating}
               placeholder="Add product rating"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -137,6 +147,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="number"
               name="price"
+              defaultValue={data.price}
               placeholder="product price"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -148,6 +159,7 @@ fetch("http://localhost:5000/products", {
             <input
               type="text"
               name="avaiablity"
+              defaultValue={data.avaiablity}
               placeholder="Available or Sold Out"
               required
               className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0"
@@ -162,12 +174,12 @@ fetch("http://localhost:5000/products", {
             type="submit"
             className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
           >
-            Add Product
+            Update Product
           </button>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddProduct;
+export default Update
