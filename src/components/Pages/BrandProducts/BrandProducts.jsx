@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router-dom"
 import { Carousel, Typography, Button } from "@material-tailwind/react";
+import OnlyProducts from "./OnlyProducts";
 
 
 
 
 const BrandProducts = () => {
     const data = useLoaderData()
-    console.log(data)
   return (
     <div>
     <Carousel className="rounded-xl">
@@ -71,7 +71,17 @@ const BrandProducts = () => {
       </div>
     </Carousel>
 
-      {data.length}
+    <div className="my-8"> 
+    <p className="my-12 mx-auto text-center text-3xl font-semibold capitalize">Our Products From {data[0].brand}</p>
+
+    <div className="my-4 grid xl:grid-cols-3 gap-4 grid-cols-1 items-center lg:container mx-auto justify-center">
+  {data.map((data) => (
+    <OnlyProducts key={data._id} data={data} />
+  ))}
+</div>
+
+
+</div>
     </div>
   )
 }

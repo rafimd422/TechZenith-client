@@ -5,6 +5,7 @@ import {
     Typography,
     Button,
     IconButton,
+    Badge,
   } from "@material-tailwind/react";
 import './nav.css'
 import { NavLink } from "react-router-dom";
@@ -30,7 +31,7 @@ const Nav = () => {
     <NavLink to={'/addproduct'}>Add Product</NavLink>
       </li>
       <li className="text-black text-sm p-2 text-center">
-                <NavLink to={'/cart'}>My Cart</NavLink>
+      <Badge content={5} withBorder><NavLink className={'p-2'} to={'/cart'}>My Cart</NavLink></Badge>
       </li>
     </ul>
   );
