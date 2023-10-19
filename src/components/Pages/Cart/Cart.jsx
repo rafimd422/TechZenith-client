@@ -30,6 +30,8 @@ const Cart = () => {
             </div>
           </div>
         </div>
+
+        
         {/* Subtotal */}
         <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
           <div className="mb-2 flex justify-between">

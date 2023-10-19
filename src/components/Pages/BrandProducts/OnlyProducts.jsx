@@ -47,11 +47,11 @@ return (
 
 <div className="flex flex-col">
 <CardFooter className="pt-0 flex justify-between">
-        <Button 
+<NavLink to={`/products/id/${data._id}`}><Button 
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
-          <NavLink to={`/products/id/${data._id}`}>View Details</NavLink>
-        </Button>
+          View Details
+        </Button></NavLink>
 <NavLink to={`/update/id/${data._id}
 `}>        <Button
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"

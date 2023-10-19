@@ -8,8 +8,7 @@ import {
     Badge,
   } from "@material-tailwind/react";
 import './nav.css'
-import { NavLink } from "react-router-dom";
-import SignIn from "../Pages/SignIn/SignIn";
+import { Link, NavLink } from "react-router-dom";
 
 const Nav = () => {
   
@@ -40,13 +39,13 @@ const Nav = () => {
     <div className="max-h-[768px] w-full">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
+<Link to={'/'}><Typography
             as="a"
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium text-orange-800 text-xl"
           >
             Tech<span className="font-semibold"><span className="text-red-900 text-xl">Z</span>eni<span className="text-red-900 text-xl">th</span></span>
-          </Typography>
+          </Typography></Link>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
