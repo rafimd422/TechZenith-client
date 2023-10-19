@@ -1,8 +1,29 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# TechZenith - A Simple CRUD Application for Tech Products
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Welcome to **TechZenith**, a straightforward CRUD (Create, Read, Update, Delete) application for technology and electronics products. This user-friendly website allows you to manage product data with ease.
+
+## Live Site
+
+https://tech-zenith.web.app/
+
+## Features
+
+- **Create Products**: Add new products, which are stored in our MongoDB database and displayed in our product catalog.
+
+- **Read Products**: Browse the product catalog to view product details.
+
+- **Update Product Details**: Modify product information, with real-time updates in the catalog.
+
+- **Delete Products**: Remove items from your cart effortlessly, and the database is updated accordingly.
+
+- **User Authentication**: Secure user authentication powered by Firebase, including Google login integration.
+
+- **Private Routes**: Certain pages are accessible for registered users, enhancing both privacy and security.
+
+## Technologies Used
+
+- Frontend: React.js, React Router, Tailwind CSS, Material Tailwind
+- Backend: Express.js, MongoDB
+- Authentication: Firebase
