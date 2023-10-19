@@ -27,19 +27,37 @@ const Nav = () => {
   }, []);
 const {user} = useContext(AuthContext)
 
+
 const handleLogOut = () => {
-  signOut(auth).then(() => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Log Out successfull',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    window.location.reload();
-  }).catch((error) => {
-    console.log(error.message)
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to log out?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Log out',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      signOut(auth)
+        .then(() => {
+          // Logout successful
+          Swal.fire({
+            title: 'Logged Out',
+            text: 'You have been logged out successfully.',
+            icon: 'success',
+          });
+
+          // Reload the page or perform other post-logout actions
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
   });
-}
+};
+
 
 
 
@@ -157,23 +175,17 @@ const handleLogOut = () => {
             </Typography>
           </div>
           {/* //click handler  */}
-          <Button onClick={handleLogOut} variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 text-whiter">
+          <Button onClick={handleLogOut} variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 hover:bg-gray-900 text-white">
             Log OUT
           </Button>
         </div>
       ) : (
         <NavLink to="/signIn">
-          <Button variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 text-whiter">
+          <Button variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 hover:bg-blue-gray-900 text-white">
             Log In
           </Button>
         </NavLink>
       )}
-
-
-
-
-
-
 
           </div>
         </MobileNav>
