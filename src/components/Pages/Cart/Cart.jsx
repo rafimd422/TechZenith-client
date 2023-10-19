@@ -1,15 +1,51 @@
 import { Tooltip } from "@material-tailwind/react";
+import { useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const data = useLoaderData()
   const intdata = data.map(data => parseInt(data.price))
-
-
+intdata.push(0) // to not showing error for empty array with reduce method
  const getSum = intdata.reduce((total,num) => {
 return total + num
   })
+
+  const deleteCart = (id) => {
+ 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to remove this item from the cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/cart/${id}`, {
+          method: 'DELETE', 
+          headers: { 'Content-Type': 'application/json' },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if(data.deletedCount > 0){
+            Swal.fire('Deleted!', 'Your item has been removed from the cart.', 'success')
+            window.location.reload()
+          }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    });
+  };
+  
+
+
+
 
 
   return (
@@ -18,7 +54,7 @@ return total + num
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
           {data.map(data => 
-            <div className="justify-between mb-6 rounded-lg bg-white p-4 shadow-md sm:flex sm:justify-start">
+            <div key={data._id} className="justify-between mb-6 rounded-lg bg-white p-4 shadow-md sm:flex sm:justify-start">
             <img
               src={data.photourl}
               alt="product-image"
@@ -36,8 +72,8 @@ return total + num
                 <div className="flex items-center space-x-4">
                   <p className="text-sm">{data.price}$</p>
                   <Tooltip content="Remove form cart" placement="top-start">
-                <p className="p-2">
-                <FaDeleteLeft className="text-2xl"/></p>
+                <p className="p-2" onClick={()=>deleteCart(data._id)}>
+                <FaDeleteLeft className="text-2xl cursor-pointer"/></p>
                 </Tooltip>
                 </div>
               </div>
