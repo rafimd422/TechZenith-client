@@ -1,11 +1,17 @@
 import { Input } from "@material-tailwind/react";
+import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa6"
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { AuthContext } from "../../Context/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 
 
 const SignUp = () => {
-  
+  const {registration} = useContext(AuthContext)
+
+  const navigate = useNavigate()
 const handleRegister = e =>{
   e.preventDefault()
   const form = e.target;
@@ -15,6 +21,73 @@ const handleRegister = e =>{
   const password = form.password.value;
 
 console.log(email,password,name,photo)
+
+const hasCapitalLetter = /[A-Z]/.test(password);
+const hasSpecialCharacter = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+
+
+if(password.length < 6){
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Password must contain more than 6 characters',
+  })
+  return;
+}
+if (!hasCapitalLetter) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Password must contain at least one capital letter',
+  })
+  return;
+}
+
+if (!hasSpecialCharacter) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Password must contain at least one special character',
+  })
+  return;
+}
+registration(email,password)
+.then(result =>{
+  const user = result.user;
+  console.log(user)
+              // update profile
+              updateProfile(user.auth.currentUser, {
+                displayName: name,
+                photoURL: photo
+              })
+              .then(()=>{
+                console.log('Profile updated successfully')
+                Swal.fire({
+                  position: 'middle-center',
+                  icon: 'success',
+                  title: 'Registration Successfull',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                navigate('/')
+              }
+              ) 
+                .catch((error) => {
+                console.error('Error updating profile:', error.message);
+              }); 
+})
+.catch((error) => {
+  console.error('Error', error.message);
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: `${error.message}`,
+  })
+});
+
+
+
+
 
 }
 
@@ -27,18 +100,18 @@ console.log(email,password,name,photo)
       <h1 className="text-2xl font-bold my-4 text-center ">Register Now</h1>
       <form onSubmit={handleRegister} className="space-y-6">
         <div className="space-y-1 text-sm">
-          <Input type="text" label='Your Name' name="name" id="name" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="text" label='Your Name' name="name" required id="name" className="w-full px-4 py-3 rounded-md border border-gray-200" />
         </div>
         <div className="space-y-1 text-sm">
-          <Input type="url" label='Your Photo Url' name="photo" id="photo" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="url" label='Your Photo Url' name="photo" id="photo" className="w-full px-4 py-3 rounded-md border border-gray-200" required />
         </div>
         <div className="space-y-1 text-sm">
-          <Input type="email" label='Email' name="email" id="email" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="email" label='Email' name="email" id="email" className="w-full px-4 py-3 rounded-md border border-gray-200" required />
         </div>
         <div className="space-y-1 text-sm">
-          <Input type="password"  label='Password' name="password" id="password" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="password"  label='Password' name="password" id="password" className="w-full px-4 py-3 rounded-md border border-gray-200" required/>
           <div className="flex justify-end text-xs">
-            <a rel="noopener noreferrer" href="#">Forgot Password?</a>
+<Link>Forgot Password?</Link>
           </div>
         </div>
         <button type="submit" className="block w-full p-3 text-center rounded-sm border border-gray-200 bg-gray-600 text-white font-bold">Sign in</button>

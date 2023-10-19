@@ -1,15 +1,44 @@
 import { Input } from "@material-tailwind/react";
+import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa6"
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
-
+const {signIn } = useContext(AuthContext)
+const navigate = useNavigate()
 const handleLogIn = e =>{
 
   e.preventDefault()
 const form = e.target;
 const email = form.email.value;
 const password = form.password.value;
+
+signIn(email,password)
+.then(result =>{
+const user = result.user;
+console.log(user)
+Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Log in successfull',
+  showConfirmButton: false,
+  timer: 1500
+})
+navigate('/')
+})
+ .catch(error =>{
+  console.log(error.message)
+
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text:`${error.message}`,
+  })
+
+})
+
 
 console.log(email, password)
 }
@@ -30,7 +59,7 @@ console.log(email, password)
   
           <Input type="password"  label='Password' name="password" id="password" className="w-full px-4 py-3 rounded-md border border-gray-200" />
           <div className="flex justify-end text-xs">
-            <a rel="noopener noreferrer" href="#">Forgot Password?</a>
+<Link>Forgot Password?</Link>
           </div>
         </div>
         <button type="submit" className="block w-full p-3 text-center rounded-sm border border-gray-200 bg-gray-600 text-white font-bold">Sign in</button>
