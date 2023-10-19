@@ -1,18 +1,34 @@
+import { Input } from "@material-tailwind/react";
 import { FaGoogle } from "react-icons/fa6"
+import { NavLink } from 'react-router-dom';
 
 const SignIn = () => {
+
+const handleLogIn = e =>{
+
+  e.preventDefault()
+const form = e.target;
+const email = form.email.value;
+const password = form.password.value;
+
+console.log(email, password)
+}
+
+
+
+
+
   return (
-    <div className="h-screen flex items-center">
+    <div className="md:h-screen h-[80vh] flex items-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl border border-gray-300 mx-auto">
-      <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form noValidate action="" className="space-y-6">
+      <h1 className="text-2xl font-bold my-4 text-center ">Login</h1>
+      <form onSubmit={handleLogIn} className="space-y-6">
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block">Email</label>
-          <input type="email" name="email" id="email" placeholder="Enter Your Email" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="email" label='Email' name="email" id="email" className="w-full px-4 py-3 rounded-md border border-gray-200" />
         </div>
         <div className="space-y-1 text-sm">
-          <label htmlFor="password" className="block">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+  
+          <Input type="password"  label='Password' name="password" id="password" className="w-full px-4 py-3 rounded-md border border-gray-200" />
           <div className="flex justify-end text-xs">
             <a rel="noopener noreferrer" href="#">Forgot Password?</a>
           </div>
@@ -28,11 +44,12 @@ const SignIn = () => {
         <FaGoogle />
       </div>
       <p className="text-xs text-center sm:px-6">Don't have an account?
-        <a rel="noopener noreferrer" href="#" className="underline">Sign up</a>
+        <NavLink to={'/signup'}>Sign up</NavLink>
       </p>
     </div>
 
-    </div>  );
+    </div>
+      );
 }
 
 export default SignIn;
