@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     Navbar,
     MobileNav,
@@ -6,12 +6,17 @@ import {
     Button,
     IconButton,
     Badge,
+    Avatar,
   } from "@material-tailwind/react";
 import './nav.css'
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
+import { signOut } from "firebase/auth";
+import auth from "../../../firebase.config";
+import Swal from "sweetalert2";
+
 
 const Nav = () => {
-  
  const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -20,7 +25,25 @@ const Nav = () => {
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
- 
+const {user} = useContext(AuthContext)
+
+const handleLogOut = () => {
+  signOut(auth).then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Log Out successfull',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    window.location.reload();
+  }).catch((error) => {
+    console.log(error.message)
+  });
+}
+
+
+
+
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-3 p-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li className="text-black text-sm p-2 text-center md:my-0">
@@ -39,7 +62,7 @@ const Nav = () => {
     <div className="max-h-[768px] w-full">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
-<Link to={'/'}><Typography
+        <Link to={'/'}><Typography
             as="a"
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium text-orange-800 text-xl"
@@ -49,13 +72,37 @@ const Nav = () => {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <Button
+              {/* <Button
                 variant="text"
                 size="sm"
                 className="hidden lg:inline-block"
               >
                 <NavLink to={'/signin'}>Log In</NavLink>
-              </Button>
+              </Button> */}
+                         {user !== null ? (
+        <div className="items-center gap-1 p-1 hidden lg:flex flex-row-reverse">
+<div className="flex flex-col items-center gap-1">          
+<Avatar src={user?.photoURL} alt="avatar" />
+          <Typography variant="h6" className="text-black">
+              {user?.displayName}
+            </Typography></div>
+          <div>
+
+          </div>
+          {/* //click handler  */}
+          <div>
+          <Button onClick={handleLogOut} variant="text" size="sm" className="p-2 text-sm my-2 hidden lg:inline-block text-whiter">
+            Log OUT
+          </Button>
+          </div>
+        </div>
+      ) : (
+        <NavLink to="/signIn">
+          <Button variant="text" size="sm" className="p-2 hidden lg:inline-block text-sm my-2">
+            Log In
+          </Button>
+        </NavLink>
+      )}
             </div>
             <IconButton
               variant="text"
@@ -98,10 +145,36 @@ const Nav = () => {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="p-1">
-              <NavLink to={'/signIn'}>Log In</NavLink>
-            </Button>
+          <div className="flex flex-col-reverse items-center gap-x-1">
+
+
+          {user !== null ? (
+        <div className="flex flex-col items-center gap-1 p-1">
+          <Avatar src={user?.photoURL} alt="avatar" />
+          <div>
+            <Typography variant="h6" className="text-black">
+              {user?.displayName}
+            </Typography>
+          </div>
+          {/* //click handler  */}
+          <Button onClick={handleLogOut} variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 text-whiter">
+            Log OUT
+          </Button>
+        </div>
+      ) : (
+        <NavLink to="/signIn">
+          <Button variant="text" size="sm" className="p-2 text-sm my-2 bg-gray-800 text-whiter">
+            Log In
+          </Button>
+        </NavLink>
+      )}
+
+
+
+
+
+
+
           </div>
         </MobileNav>
       </Navbar>
