@@ -1,5 +1,4 @@
 import { Tooltip } from "@material-tailwind/react";
-import { useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -24,7 +23,7 @@ return total + num
       confirmButtonText: 'Yes!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cart/${id}`, {
+        fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/cart/${id}`, {
           method: 'DELETE', 
           headers: { 'Content-Type': 'application/json' },
         })

@@ -10,7 +10,7 @@ const ProductDetails = () => {
       const { brand, category, name, price, rating, photourl } = data;
       const newObject = { brand, name, category, price, photourl, rating };
     
-      fetch('http://localhost:5000/cart', {
+      fetch('https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/cart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
