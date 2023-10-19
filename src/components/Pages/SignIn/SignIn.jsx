@@ -4,6 +4,9 @@ import { FaGoogle } from "react-icons/fa6"
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import auth from "../../../../firebase.config";
+
 
 const SignIn = () => {
 const {signIn } = useContext(AuthContext)
@@ -36,11 +39,34 @@ navigate('/')
     title: 'Oops...',
     text:`${error.message}`,
   })
-
 })
-
-
 console.log(email, password)
+}
+
+const googleLogIn = () =>{
+  console.log('google log in coming soon')
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+  .then(result => {
+    const user = result.user;
+    console.log(user)
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Log in successfull',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    navigate('/')
+
+  }) .catch(error =>{
+  
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text:`${error.message}`,
+    })
+  })
 }
 
 
@@ -50,14 +76,13 @@ console.log(email, password)
   return (
     <div className="md:h-screen h-[80vh] flex items-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl border border-gray-300 mx-auto">
-      <h1 className="text-2xl font-bold my-4 text-center ">Login</h1>
+      <h1 className="text-3xl font-extrabold my-4 pb-8 text-center ">Login Now</h1>
       <form onSubmit={handleLogIn} className="space-y-6">
         <div className="space-y-1 text-sm">
-          <Input type="email" label='Email' name="email" id="email" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="email" label='Email' required name="email" id="email" className="w-full px-4 py-3 rounded-md border border-gray-200" />
         </div>
         <div className="space-y-1 text-sm">
-  
-          <Input type="password"  label='Password' name="password" id="password" className="w-full px-4 py-3 rounded-md border border-gray-200" />
+          <Input type="password"  label='Password' name="password" id="password" required className="w-full px-4 py-3 rounded-md border border-gray-200" />
           <div className="flex justify-end text-xs">
 <Link>Forgot Password?</Link>
           </div>
@@ -66,14 +91,14 @@ console.log(email, password)
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16"></div>
-        <p className="px-3 text-sm">Login with social accounts</p>
+        <p className="px-3 text-sm">Login with social account</p>
         <div className="flex-1 h-px sm:w-16"></div>
       </div>
       <div className="flex justify-center">
-        <FaGoogle />
+        <FaGoogle className="cursor-pointer" onClick={googleLogIn} />
       </div>
-      <p className="text-xs text-center sm:px-6">Don't have an account?
-        <NavLink to={'/signup'}>Sign up</NavLink>
+      <p className="text-sm text-center sm:px-6">Don't have an account? 
+        <NavLink className={'text-green-600'} to={'/signup'}> Sign up</NavLink>
       </p>
     </div>
 

@@ -34,7 +34,7 @@ fetch(`http://localhost:5000/products/${data._id}`,{
     console.log(data);
     if(data.modifiedCount > 0){
         Swal.fire({
-            position: 'middle-center',
+            position: 'center',
             icon: 'success',
             title: 'Product has been Updated',
             showConfirmButton: false,

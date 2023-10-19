@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import {
     Navbar,
-    MobileNav,
+    Collapse,
     Typography,
     Button,
     IconButton,
@@ -161,7 +161,7 @@ const handleLogOut = () => {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex flex-col-reverse items-center gap-x-1">
 
@@ -188,7 +188,7 @@ const handleLogOut = () => {
       )}
 
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );

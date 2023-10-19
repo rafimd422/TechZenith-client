@@ -4,7 +4,8 @@ import { FaGoogle } from "react-icons/fa6"
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthProvider";
-import { updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
+import auth from "../../../../firebase.config";
 
 
 
@@ -63,7 +64,7 @@ registration(email,password)
               .then(()=>{
                 console.log('Profile updated successfully')
                 Swal.fire({
-                  position: 'middle-center',
+                  position: 'center',
                   icon: 'success',
                   title: 'Registration Successfull',
                   showConfirmButton: false,
@@ -84,13 +85,32 @@ registration(email,password)
     text: `${error.message}`,
   })
 });
-
-
-
-
-
 }
+const googleLogIn = () =>{
+  console.log('google log in coming soon')
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+  .then(result => {
+    const user = result.user;
+    console.log(user)
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Registration Successfull',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    navigate('/')
 
+  }) .catch(error =>{
+  
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text:`${error.message}`,
+    })
+  })
+}
 
 
 
@@ -122,7 +142,7 @@ registration(email,password)
         <div className="flex-1 h-px sm:w-16"></div>
       </div>
       <div className="flex justify-center">
-        <FaGoogle className="text-xl" />
+        <FaGoogle className="cursor-pointer" onClick={googleLogIn} />
       </div>
       <p className="text-sm text-center sm:px-6">Already have an account?
 <NavLink className={"text-green-800"} to={'/signin'}>Sign in</NavLink>    
