@@ -53,7 +53,7 @@ const Router = createBrowserRouter([
         {
           path: "/cart",
           element: <PrivateRoute><Cart /></PrivateRoute>,
-          loader: ()=> fetch('https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/cart')
+          loader: ()=> fetch('https://tech-zenith-server-side-5fjmr2vok-rafimd422.vercel.app/cart/')
         },
       ],
     },
