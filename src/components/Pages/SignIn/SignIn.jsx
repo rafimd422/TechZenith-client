@@ -39,6 +39,7 @@ navigate('/')
     title: 'Oops...',
     text:`${error.message}`,
   })
+  window.location.reload();
 })
 console.log(email, password)
 }
@@ -66,6 +67,7 @@ const googleLogIn = () =>{
       title: 'Oops...',
       text:`${error.message}`,
     })
+    window.location.reload();
   })
 }
 

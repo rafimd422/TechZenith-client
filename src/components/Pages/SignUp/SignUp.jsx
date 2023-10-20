@@ -84,6 +84,7 @@ registration(email,password)
     title: 'Oops...',
     text: `${error.message}`,
   })
+  window.location.reload();
 });
 }
 const googleLogIn = () =>{
@@ -109,6 +110,7 @@ const googleLogIn = () =>{
       title: 'Oops...',
       text:`${error.message}`,
     })
+    window.location.reload();
   })
 }
 
