@@ -17,7 +17,7 @@ const AddProduct = () => {
 const formDetails = { name, photourl, brand, category , shortdescription , rating ,price,avaiablity}
 console.log(formDetails)
 
-fetch("https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/products", {
+fetch("https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

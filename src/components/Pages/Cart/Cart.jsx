@@ -23,8 +23,8 @@ return total + num
       confirmButtonText: 'Yes!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/cart/${id}`, {
-          method: 'DELETE', 
+        fetch(`https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/cart/${id}`, {
+          method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
         })
           .then((res) => res.json())
@@ -42,7 +42,6 @@ return total + num
     });
   };
   
-
 
 
 

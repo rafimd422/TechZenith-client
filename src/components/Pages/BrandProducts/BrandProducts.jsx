@@ -26,7 +26,6 @@ const BrandProducts = () => {
              We Provide Best Products in town
             </Typography>
             <div className="flex justify-center gap-2">
-
             </div>
           </div>
         </div>

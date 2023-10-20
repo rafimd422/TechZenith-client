@@ -30,17 +30,17 @@ const Router = createBrowserRouter([
         {
           path: "/products/:id",
           element: <BrandProducts />,
-          loader: ({ params }) => fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/products/${params.id}`)
+          loader: ({ params }) => fetch(`https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/products/${params.id}`)
         },
         {
           path: "/products/id/:id",
           element: <PrivateRoute><ProductDetails /></PrivateRoute>,
-          loader: ({ params })=> fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/products/id/${params.id}`)
+          loader: ({ params })=> fetch(`https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/products/id/${params.id}`)
         },
         {
           path: "/update/id/:id",
           element: <PrivateRoute><Update /></PrivateRoute>,
-          loader: ({ params })=> fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/products/id/${params.id}`)
+          loader: ({ params })=> fetch(`https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/products/id/${params.id}`)
         },
         {
           path: "/signin",
@@ -53,7 +53,7 @@ const Router = createBrowserRouter([
         {
           path: "/cart",
           element: <PrivateRoute><Cart /></PrivateRoute>,
-          loader: ()=> fetch('https://tech-zenith-server-side-5fjmr2vok-rafimd422.vercel.app/cart/')
+          loader: ()=> fetch('https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/cart')
         },
       ],
     },

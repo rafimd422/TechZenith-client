@@ -22,7 +22,7 @@ const Navigate = useNavigate()
   const formDetails = { name, photourl, brand, category , shortdescription , rating ,price,avaiablity}
   console.log(formDetails)
   
-fetch(`https://tech-zenith-server-side-1fagv0szw-rafimd422.vercel.app/products/${data._id}`,{
+fetch(`https://tech-zenith-server-side-j3ta6n5qm-rafimd422.vercel.app/products/${data._id}`,{
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
